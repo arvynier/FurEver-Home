@@ -1,8 +1,8 @@
-<h1 align="center">
+<h1 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=20&pause=1000&color=2196F3&center=true&vCenter=true&width=600&lines=FurEver+Home" />
 </h1>
 
-<h2 align="center">
+<h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=true&vCenter=true&width=600&lines=Project+Description" />
 </h2>
 
