@@ -1,4 +1,4 @@
-<h1 align="left">
+<h1 align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=20&pause=1000&color=2196F3&center=true&vCenter=true&width=600&lines=FurEver+Home" />
 </h1>
 
