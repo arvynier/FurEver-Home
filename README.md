@@ -1,3 +1,3 @@
-# Project Description ### Medium Heading
+# Project Description ###Medium Heading
 
 *FurEver Home* is a Java-based Animal Adoption and Responsible Ownership System designed to facilitate the adoption process while promoting informed and responsible pet ownership. It supports the whole adoption process from posting an animal for adoption to completing a responsible adoption. Specifically, FurEver Home promotes responsible, planned adoption by assessing an adopter's ability to care for the animal they intend to adopt and providing information such as the long-term cost of pet ownership. As such, it ensures that animals are adopted by people who are prepared and committed to care for them for life. 
