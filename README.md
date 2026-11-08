@@ -43,3 +43,18 @@ Specifically, this project aims to:
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Main+Features" />
 </h2>
+1. User Registration and Login – Allows users to create an account, log in, and access the system. One account can be used for both adopting and posting animals.
+
+2. Animal Browsing and Profiles – Allows users to browse animals available for adoption or rehoming and view their details, including breed, age, health condition, personality, and care requirements.
+
+3. Animal Listing Management – Allows users to post animals for adoption, add animal information, and edit or remove their listings.
+
+4. Adoption Readiness Assessment – Provides questions that evaluate a user's financial capacity, time commitment, living environment, and ability to provide proper care for their chosen animal.
+
+5. Adoption Application – Allows users to submit an adoption application together with their assessment answers for the animal poster to review.
+
+6. Application Management – Allows animal posters to review applications and approve or reject prospective adopters. Applicants can also check their application status.
+
+7. User-to-User Messaging – Allows users to communicate with animal posters or prospective adopters regarding animal listings and adoption inquiries.
+
+8. Responsible Ownership and Cost Guide – Provides basic pet care information and estimated expenses to help users understand the long-term responsibilities of owning an animal.
