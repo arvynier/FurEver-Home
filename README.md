@@ -5,7 +5,7 @@
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Project+Description" />
 </h2>
-<b>FurEver Home</b> is a Java-based Animal Adoption and Responsible Ownership System designed to facilitate the adoption process while promoting informed and responsible pet ownership. It supports the whole adoption process from posting an animal for adoption to completing a responsible adoption. Specifically, FurEver Home promotes responsible, planned adoption by assessing an adopter's ability to care for the animal they intend to adopt and providing information such as the long-term cost of pet ownership. As such, it ensures that animals are adopted by people who are prepared and committed to care for them for life. 
+<b><i></i>FurEver Home</i></b> is a Java-based Animal Adoption and Responsible Ownership System designed to facilitate the adoption process while promoting informed and responsible pet ownership. It supports the whole adoption process from posting an animal for adoption to completing a responsible adoption. Specifically, FurEver Home promotes responsible, planned adoption by assessing an adopter's ability to care for the animal they intend to adopt and providing information such as the long-term cost of pet ownership. As such, it ensures that animals are adopted by people who are prepared and committed to care for them for life. 
 
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Problem+being+Addressed" />
@@ -36,9 +36,9 @@ Specifically, this project aims to:
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Target+Users" />
 </h2>
-Prospective Adopter – individual that is interested in adopting animals. They can browse the animal profiles, submit an adoption application, take readiness assessment, and read long-term costs and care guidelines. 
+<b>Prospective Adopter</b> – individual that is interested in adopting animals. They can browse the animal profiles, submit an adoption application, take readiness assessment, and read long-term costs and care guidelines. 
 
-Current Owner/Rescuer – posting animals for adoption or rehoming. They can create and manage animal listings, provide animal information, respond to interested adopters, and approve/reject adoption applications. 
+<b>Current Owner/Rescuer</b> – posting animals for adoption or rehoming. They can create and manage animal listings, provide animal information, respond to interested adopters, and approve/reject adoption applications. 
 
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Main+Features" />
