@@ -43,7 +43,8 @@ Specifically, this project aims to:
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Main+Features" />
 </h2>
-  1. User Registration and Login – Allows users to create an account, log in, and access the system. One account can be used for both adopting and posting animals.
+hadhsha
+1. User Registration and Login – Allows users to create an account, log in, and access the system. One account can be used for both adopting and posting animals.
 
 2. Animal Browsing and Profiles – Allows users to browse animals available for adoption or rehoming and view their details, including breed, age, health condition, personality, and care requirements.
 
