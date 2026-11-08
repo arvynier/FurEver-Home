@@ -36,8 +36,9 @@ Specifically, this project aims to:
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Target+Users" />
 </h2>
-**Prospective Adopter** – individual that is interested in adopting animals. They can browse the animal profiles, submit an adoption application, take readiness assessment, and read long-term costs and care guidelines. 
-**Current Owner/Rescuer** – posting animals for adoption or rehoming. They can create and manage animal listings, provide animal information, respond to interested adopters, and approve/reject adoption applications. 
+Prospective Adopter – individual that is interested in adopting animals. They can browse the animal profiles, submit an adoption application, take readiness assessment, and read long-term costs and care guidelines. 
+
+Current Owner/Rescuer – posting animals for adoption or rehoming. They can create and manage animal listings, provide animal information, respond to interested adopters, and approve/reject adoption applications. 
 
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Main+Features" />
