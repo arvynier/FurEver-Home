@@ -22,7 +22,6 @@ FurEver Home aims to promote responsible animal adoption by assessing the adopte
 Specifically, this project aims to:  
 
 1.  Provide a centralized platform where users can browse animals that are ready for adoption. 
-
 2. Provide detailed animal profiles to help prospective adopters understand each animal’s needs and condition.
    
 3. Evaluate prospective adopters’ readiness, financial capacity, and ability to provide proper animal care. 
