@@ -10,9 +10,9 @@
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Problem+being+Addressed" />
 </h2>
-Some adopters may adopt on impulse or lack sufficient financial resources, time, knowledge, or a suitable living environment to properly care for an animal. Shelters also lack a standardized and efficient process of assessing the adopters’ readiness. As such, this can lead to neglected pets, unsuccessful adoptions, animals being returned to shelters and rescuers, or animal suffering.  
+Some animal adoptions usually fail because adopters are not ready for the responsibility. They may adopt on impulse, or may lack the necessary resources, money, time, knowledge or living environment to properly care for an animal. Furthermore, shelters, rescuers and rehomers  lack a standardized and efficient process of assessing the adopters’ readiness. As such, this can lead to neglected pets, unsuccessful adoptions, animals being returned to shelters and rescuers, or animal suffering. 
 
-FurEver Home addresses this problem by providing an adoption platform that not only connects animals with potential adopters but also encourages responsible and planned adoption through readiness assessments, animal care information, and estimated long-term ownership costs. Thus, this system aims to ensure that these animals up for adoption find their forever home. 
+FurEver Home addresses this problem by providing an adoption platform that not only connects animals with potential adopters but also encourages responsible and planned adoption through readiness assessments, animal care guidance, and estimated long-term ownership costs. Aside from connecting animals to potential adopters, this project also helps adopters to decide if they are truly ready to commit a pet, and helps rehomers to determine if the adopters can care for them. Shelters/rescuers/rehomers can list animals, while adopters can browse them, provide necessary information and complete a readiness assessment. Therefore, this system aims to ensure that these animals up for adoption find their forever home. 
 
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Problem+Objectives" />
