@@ -17,45 +17,37 @@ FurEver Home addresses this problem by providing an adoption platform that not o
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Problem+Objectives" />
 </h2>
-FurEver Home aims to promote responsible animal adoption by assessing the adopter's capability and readiness to adopt an animal, and informing them of the long-term cost and commitment of caring for the animal they want to adopt. 
+General Objective
 
-Specifically, this project aims to:  
+To develop a Java-based application that will promote responsible animal adoption by assessing the adopter's capability and readiness to adopt an animal, and informing them of the long-term cost and commitment of caring for the animal they want to adopt.
 
-1.  Provide a centralized platform where users can browse animals that are ready for adoption.
+Specific Objectives
 
-2. Provide detailed animal profiles to help prospective adopters understand each animal’s needs and condition.
-   
-3. Evaluate prospective adopters’ readiness, financial capacity, and ability to provide proper animal care. 
-
-4. Help the administrators assess adoption applications before making approval decisions. 
-
-5. Establish communication between adopters and animal poster or rescuers. 
-
-6. Promote responsible pet ownership by providing care guides and information about long-term expenses.
+The project aims to:
+1. Provide a centralized platform where users can browse animals available for adoption or rehoming.
+2. Present detailed animal profiles (photo, breed, age, health condition, personality, and care requirements) to help prospective adopters understand each animal’s needs and condition, and decide whether an animal suits them.
+3. Enable registered users to post animals for adoption or submit an adoption application through an account that can be used for both adopting and posting.
+4. Evaluate each prospective adopter’s readiness through a standardized assessment composed of core questions for all adopters (financial capacity, time commitment, living environment, and care experience), and a set of questions specific to the animal’s breed category..
+5. Streamline the adoption application process by allowing adopters to submit applications with their assessment results, enabling animal posters to review and approve or reject them, and letting applicants track their status.
+6. Facilitate direct communication between adopters and animal posters, shelters, rehomers or rescuers about listings and adoption inquiries.
+7. Promote responsible pet ownership by providing care guides and estimated long-term ownership costs.
 
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Target+Users" />
 </h2>
-<b>Prospective Adopter</b> – individual that is interested in adopting animals. They can browse the animal profiles, submit an adoption application, take readiness assessment, and read long-term costs and care guidelines. 
+<b>Prospective Adopter</b> – individuals that are interested in adopting animals. They can browse the animal profiles, submit an adoption application, take readiness assessment, track application status, message animal posters and read long-term costs and care guidelines. 
 
-<b>Current Owner/Rescuer</b> – posting animals for adoption or rehoming. They can create and manage animal listings, provide animal information, respond to interested adopters, and approve/reject adoption applications. 
+<b>Current Owner/Rescuer (Animal Posters)</b> – individuals that post animals for adoption or rehoming. They can create and manage animal listings, provide animal information, respond to interested adopters, and approve/reject adoption applications.
 
 <h2 align="left">
   <img src="https://readme-typing-svg.herokuapp.com?font=Press+Start+2P&size=12&pause=1000&color=87CEEB&center=false&vCenter=true&width=600&lines=Main+Features" />
 </h2>
 
-1. User Registration and Login – Allows users to create an account, log in, and access the system. One account can be used for both adopting and posting animals.
-
-2. Animal Browsing and Profiles – Allows users to browse animals available for adoption or rehoming and view their details, including breed, age, health condition, personality, and care requirements.
-
-3. Animal Listing Management – Allows users to post animals for adoption, add animal information, and edit or remove their listings.
-
-4. Adoption Readiness Assessment – Provides questions that evaluate a user's financial capacity, time commitment, living environment, and ability to provide proper care for their chosen animal.
-
-5. Adoption Application – Allows users to submit an adoption application together with their assessment answers for the animal poster to review.
-
-6. Application Management – Allows animal posters to review applications and approve or reject prospective adopters. Applicants can also check their application status.
-
-7. User-to-User Messaging – Allows users to communicate with animal posters or prospective adopters regarding animal listings and adoption inquiries.
-
-8. Responsible Ownership and Cost Guide – Provides basic pet care information and estimated expenses to help users understand the long-term responsibilities of owning an animal.
+1. User Registration and Login - Lets users create a secure account and log in. A single account supports both adopting and posting animals, so users do not need separate accounts.
+2. Animal Browsing and Profiles - Lets users browse animals available for adoption or rehoming and view each animal’s breed, age, health condition, personality, and care requirements. This helps adopters find animals that fit their situation.
+3. Animal Listing Management - Lets users post animals for adoption, enter complete animal information, and edit or remove their own listings so the information stays accurate.
+4. Adoption Readiness Assessment - Provides a standardized questionnaire with two parts: core questions (financial capacity, time commitment, living environment, and care experience), and questions specific to breed category. Answers are summarized into a readiness result that adopters can see and animal posters can use in their review. The assessment is integrated into the application, so adopters answer it while filling out their application.
+5. Adoption Application - Lets users submit an adoption application for a specific animal, together with their assessment answers, for the animal poster to review.
+6. Application Management - Lets animal posters review applications alongside assessment results and approve or reject them. Applicants can track the status of their applications, and both parties are notified when the status changes.
+7. User-to-User Messaging - Lets adopters and animal posters communicate within the platform about specific listings and adoption inquiries, so arrangements can be clarified before a decision is made.
+8. Responsible Ownership and Cost Guide - Provides basic pet care information and estimated long-term expenses (such as food, veterinary care, and supplies) so users understand the commitment before applying.
