@@ -50,4 +50,3 @@ The project aims to:
 5. Adoption Application - Lets users submit an adoption application for a specific animal, together with their assessment answers, for the animal poster to review.
 6. Application Management - Lets animal posters review applications alongside assessment results and approve or reject them. Applicants can track the status of their applications, and both parties are notified when the status changes.
 7. Responsible Ownership and Cost Guide - Provides basic pet care information and estimated long-term expenses (such as food, veterinary care, and supplies) so users understand the commitment before applying.
-8. User-to-User Messaging: Lets adopters and animal posters communicate within the platform about specific listings and adoption inquiries, so arrangements can be clarified before a decision is made.
