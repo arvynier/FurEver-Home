@@ -7,9 +7,15 @@ import adoption.service.AuthService;
 import adoption.repository.AnimalRepository;
 import adoption.service.AnimalService;
 import adoption.service.BrowseService;
+
 import adoption.ui.AnimalMenu;
 import adoption.ui.BrowseMenu;
 import adoption.ui.ConsoleInput;
+import adoption.ui.AdoptionAssessmentMenu;
+
+import adoption.repository.AdoptionAssessmentRepository;
+import adoption.service.AdoptionAssessmentService;
+
 
 public class Main {
     private static final String[] menuOptions = {"Register", "Login", "Exit"};
@@ -18,13 +24,16 @@ public class Main {
     private final AuthService authService;
     private final AnimalMenu animalMenu;
     private final BrowseMenu browseMenu;
+    private final AdoptionAssessmentMenu assessmentMenu;
 
     public Main(ConsoleInput input, AuthService authService,
-                AnimalMenu animalMenu, BrowseMenu browseMenu) {
+                AnimalMenu animalMenu, BrowseMenu browseMenu,
+                AdoptionAssessmentMenu assessmentMenu) {
         this.input = input;
         this.authService = authService;
         this.animalMenu = animalMenu;
         this.browseMenu = browseMenu;
+        this.assessmentMenu = assessmentMenu;
     }
 
     public static void main(String[] args) {
@@ -40,7 +49,13 @@ public class Main {
         AnimalMenu animalMenu = new AnimalMenu(input, animalService);
         BrowseMenu browseMenu = new BrowseMenu(input, browseService);
 
-        new Main(input, authService, animalMenu, browseMenu).run();
+        AdoptionAssessmentRepository assessmentRepository = new AdoptionAssessmentRepository();
+
+        AdoptionAssessmentService assessmentService = new AdoptionAssessmentService(assessmentRepository, animalRepository);
+
+        AdoptionAssessmentMenu assessmentMenu = new AdoptionAssessmentMenu(assessmentService, input);
+
+        new Main(input, authService, animalMenu, browseMenu, assessmentMenu).run();
     }
 
     private void run() {
@@ -119,17 +134,35 @@ public class Main {
             System.out.println("1. View my profile");
             System.out.println("2. Browse Animals");
             System.out.println("3. My animal listings");
-            System.out.println("4. Logout");
+            System.out.println("4. Adoption Readiness Assessment");
+            System.out.println("5. Logout");
 
             switch(prompt("Choose an option")) {
                 case "1" -> showProfile(user);
                 case "2" -> browseMenu.show(user);
                 case "3" -> animalMenu.show(user);
+
                 case "4" -> {
+                    try {
+                        int animalID = Integer.parseInt(
+                                prompt("Enter Animal ID for the assessment")
+                        );
+
+                        assessmentMenu.show(user, animalID);
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter a valid animal ID.");
+                    }
+                }
+
+                case "5" -> {
                     System.out.println("Logged out.");
                     loggedIn = false;
                 }
-                default -> System.out.println("Invalid option. Please enter 1, 2, or 3.");
+
+                default -> System.out.println(
+                        "Invalid option. Please enter 1, 2, 3, 4, or 5."
+                );
             }
         }
     }
