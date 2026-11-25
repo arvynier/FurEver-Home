@@ -5,28 +5,23 @@ import adoption.exception.NotFoundException;
 import adoption.exception.ValidationException;
 
 import adoption.model.AdoptionAssessment;
-import adoption.model.Animal;
 import adoption.model.User;
 
 import adoption.repository.AdoptionAssessmentRepository;
-import adoption.repository.AnimalRepository;
 
 public class AdoptionAssessmentService {
 
     private final AdoptionAssessmentRepository assessmentRepository;
-    private final AnimalRepository animalRepository;
 
     public AdoptionAssessmentService(
-            AdoptionAssessmentRepository assessmentRepository,
-            AnimalRepository animalRepository) {
+            AdoptionAssessmentRepository assessmentRepository) {
 
         this.assessmentRepository = assessmentRepository;
-        this.animalRepository = animalRepository;
     }
 
+    // Scores are the sum of each category's question answers
     public AdoptionAssessment takeAssessment(
             User applicant,
-            int animalID,
             int financialScore,
             int timeScore,
             int livingEnvironmentScore,
@@ -37,45 +32,14 @@ public class AdoptionAssessmentService {
             throw new ValidationException("Applicant is required.");
         }
 
-        if (animalID <= 0) {
-            throw new ValidationException("Invalid animal ID.");
-        }
-
-        Animal animal = animalRepository.findByID(animalID)
-                .orElseThrow(() -> new NotFoundException("Animal not found."));
-
-        if (animal == null) {
-            throw new NotFoundException(
-                    "Animal with ID " + animalID + " was not found.");
-        }
-
         validateScore(financialScore, "Financial Capacity");
         validateScore(timeScore, "Time Commitment");
-        validateScore(
-                livingEnvironmentScore,
-                "Living Environment"
-        );
-        validateScore(
-                careExperienceScore,
-                "Care Experience"
-        );
-
-        AdoptionAssessment existing =
-                assessmentRepository.findByApplicantAndAnimal(
-                        applicant.getID(),
-                        animalID
-                );
-
-        if (existing != null) {
-            throw new ValidationException(
-                    "You have already completed an assessment for this animal."
-            );
-        }
+        validateScore(livingEnvironmentScore, "Living Environment");
+        validateScore(careExperienceScore, "Care Experience");
 
         AdoptionAssessment assessment =
                 new AdoptionAssessment(
                         applicant.getID(),
-                        animalID,
                         financialScore,
                         timeScore,
                         livingEnvironmentScore,
@@ -90,9 +54,14 @@ public class AdoptionAssessmentService {
             String category)
             throws ValidationException {
 
-        if (score < 1 || score > 5) {
+        if (score < AdoptionAssessment.MIN_CATEGORY_SCORE
+                || score > AdoptionAssessment.MAX_CATEGORY_SCORE) {
+
             throw new ValidationException(
-                    category + " score must be between 1 and 5."
+                    category + " score must be between "
+                            + AdoptionAssessment.MIN_CATEGORY_SCORE
+                            + " and "
+                            + AdoptionAssessment.MAX_CATEGORY_SCORE + "."
             );
         }
     }
@@ -114,9 +83,8 @@ public class AdoptionAssessmentService {
         return assessment;
     }
 
-    public AdoptionAssessment getAssessmentForAnimal(
-            User applicant,
-            int animalID)
+    // Used when an application is filled in or reviewed
+    public AdoptionAssessment getLatestAssessment(User applicant)
             throws AdoptionException {
 
         if (applicant == null) {
@@ -124,14 +92,13 @@ public class AdoptionAssessmentService {
         }
 
         AdoptionAssessment assessment =
-                assessmentRepository.findByApplicantAndAnimal(
-                        applicant.getID(),
-                        animalID
+                assessmentRepository.findLatestByApplicantID(
+                        applicant.getID()
                 );
 
         if (assessment == null) {
             throw new NotFoundException(
-                    "No assessment was found for this animal."
+                    "No assessment was found for this applicant."
             );
         }
 
