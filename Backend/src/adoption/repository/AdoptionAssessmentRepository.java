@@ -5,6 +5,7 @@ import adoption.model.AdoptionAssessment;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class AdoptionAssessmentRepository
@@ -16,7 +17,6 @@ public class AdoptionAssessmentRepository
     private static final String[] HEADERS = {
             "ID",
             "applicantID",
-            "animalID",
             "financialScore",
             "timeScore",
             "livingEnvironmentScore",
@@ -40,7 +40,6 @@ public class AdoptionAssessmentRepository
         return new String[] {
                 String.valueOf(assessment.getID()),
                 String.valueOf(assessment.getApplicantID()),
-                String.valueOf(assessment.getAnimalID()),
                 String.valueOf(assessment.getFinancialScore()),
                 String.valueOf(assessment.getTimeScore()),
                 String.valueOf(assessment.getLivingEnvironmentScore()),
@@ -61,8 +60,7 @@ public class AdoptionAssessmentRepository
                 Integer.parseInt(row[4]),
                 Integer.parseInt(row[5]),
                 Integer.parseInt(row[6]),
-                Integer.parseInt(row[7]),
-                row[8]
+                row[7]
         );
     }
 
@@ -114,18 +112,14 @@ public class AdoptionAssessmentRepository
         return result;
     }
 
-    // Find assessment for a specific applicant and animal
-    public AdoptionAssessment findByApplicantAndAnimal(
-            int applicantID,
-            int animalID)
+    // Find the most recent assessment of an applicant (highest ID), or null
+    public AdoptionAssessment findLatestByApplicantID(int applicantID)
             throws AdoptionException {
 
         return loadAll()
                 .stream()
-                .filter(a ->
-                        a.getApplicantID() == applicantID
-                                && a.getAnimalID() == animalID)
-                .findFirst()
+                .filter(a -> a.getApplicantID() == applicantID)
+                .max(Comparator.comparingInt(AdoptionAssessment::getID))
                 .orElse(null);
     }
 
