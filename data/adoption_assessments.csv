@@ -1,1 +1,2 @@
-ID,applicantID,animalID,financialScore,timeScore,livingEnvironmentScore,careExperienceScore,totalScore,readinessResult
+ID,applicantID,financialScore,timeScore,livingEnvironmentScore,careExperienceScore,totalScore,readinessResult
+1,1,24,17,23,21,85,Highly Ready
