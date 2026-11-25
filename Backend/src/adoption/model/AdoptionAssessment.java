@@ -4,8 +4,8 @@ public class AdoptionAssessment {
 
     private int id;
     private int applicantID;
-    private int animalID;
 
+    // Each category score is the SUM of its question answers (1-5 each)
     private int financialScore;
     private int timeScore;
     private int livingEnvironmentScore;
@@ -14,20 +14,22 @@ public class AdoptionAssessment {
     private int totalScore;
     private String readinessResult;
 
-    // Maximum score: 8 questions x 5 points
-    public static final int MAX_SCORE = 40;
+    public static final int QUESTIONS_PER_CATEGORY = 5;
+    public static final int MAX_CATEGORY_SCORE = QUESTIONS_PER_CATEGORY * 5; // 25
+    public static final int MIN_CATEGORY_SCORE = QUESTIONS_PER_CATEGORY;     // 5
+
+    // 4 categories x 5 questions x 5 points = 100
+    public static final int MAX_SCORE = MAX_CATEGORY_SCORE * 4;
 
     // Constructor for a new assessment
     public AdoptionAssessment(
             int applicantID,
-            int animalID,
             int financialScore,
             int timeScore,
             int livingEnvironmentScore,
             int careExperienceScore) {
 
         this.applicantID = applicantID;
-        this.animalID = animalID;
 
         this.financialScore = financialScore;
         this.timeScore = timeScore;
@@ -41,7 +43,6 @@ public class AdoptionAssessment {
     public AdoptionAssessment(
             int id,
             int applicantID,
-            int animalID,
             int financialScore,
             int timeScore,
             int livingEnvironmentScore,
@@ -51,7 +52,6 @@ public class AdoptionAssessment {
 
         this.id = id;
         this.applicantID = applicantID;
-        this.animalID = animalID;
 
         this.financialScore = financialScore;
         this.timeScore = timeScore;
@@ -70,11 +70,13 @@ public class AdoptionAssessment {
                         livingEnvironmentScore +
                         careExperienceScore;
 
-        if (totalScore >= 32) {
+        double percentage = getPercentage();
+
+        if (percentage >= 80) {
             readinessResult = "Highly Ready";
-        } else if (totalScore >= 24) {
+        } else if (percentage >= 60) {
             readinessResult = "Ready";
-        } else if (totalScore >= 16) {
+        } else if (percentage >= 40) {
             readinessResult = "Needs Improvement";
         } else {
             readinessResult = "Not Yet Ready";
@@ -89,10 +91,6 @@ public class AdoptionAssessment {
 
     public int getApplicantID() {
         return applicantID;
-    }
-
-    public int getAnimalID() {
-        return animalID;
     }
 
     public int getFinancialScore() {
@@ -128,7 +126,6 @@ public class AdoptionAssessment {
         return new AdoptionAssessment(
                 id,
                 applicantID,
-                animalID,
                 financialScore,
                 timeScore,
                 livingEnvironmentScore,
