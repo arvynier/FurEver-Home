@@ -43,7 +43,7 @@ public class Main {
         AnimalRepository animalRepository = new AnimalRepository();
 
         AuthService authService = new AuthService(userRepository);
-        
+
         AnimalService animalService = new AnimalService(animalRepository, userRepository);
         BrowseService browseService = new BrowseService(animalRepository, userRepository);
         AnimalMenu animalMenu = new AnimalMenu(input, animalService);
@@ -51,7 +51,7 @@ public class Main {
 
         AdoptionAssessmentRepository assessmentRepository = new AdoptionAssessmentRepository();
 
-        AdoptionAssessmentService assessmentService = new AdoptionAssessmentService(assessmentRepository, animalRepository);
+        AdoptionAssessmentService assessmentService = new AdoptionAssessmentService(assessmentRepository);
 
         AdoptionAssessmentMenu assessmentMenu = new AdoptionAssessmentMenu(assessmentService, input);
 
@@ -119,7 +119,7 @@ public class Main {
 
             User user = authService.login(email, password);
             showAccountMenu(user);
-        } catch (AdoptionException e) { 
+        } catch (AdoptionException e) {
             System.out.println("Login failed: " + e.getMessage());
         }
     }
@@ -127,7 +127,7 @@ public class Main {
     private void showAccountMenu(User user) {
         System.out.println("\nLogin successful!");
         System.out.println("Welcome back, " + user + ".");
-        
+
         boolean loggedIn = true;
         while (loggedIn) {
             System.out.println("\nAccount Menu");
@@ -141,19 +141,7 @@ public class Main {
                 case "1" -> showProfile(user);
                 case "2" -> browseMenu.show(user);
                 case "3" -> animalMenu.show(user);
-
-                case "4" -> {
-                    try {
-                        int animalID = Integer.parseInt(
-                                prompt("Enter Animal ID for the assessment")
-                        );
-
-                        assessmentMenu.show(user, animalID);
-
-                    } catch (NumberFormatException e) {
-                        System.out.println("Please enter a valid animal ID.");
-                    }
-                }
+                case "4" -> assessmentMenu.show(user);
 
                 case "5" -> {
                     System.out.println("Logged out.");
