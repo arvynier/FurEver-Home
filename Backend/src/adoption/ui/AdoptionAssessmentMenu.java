@@ -7,6 +7,38 @@ import adoption.service.AdoptionAssessmentService;
 
 public class AdoptionAssessmentMenu {
 
+    private static final String[] FINANCIAL_QUESTIONS = {
+            "I can regularly afford food, supplies, and basic care for a pet.",
+            "I can handle expected veterinary and other pet-related expenses.",
+            "I have savings or a plan to cover unexpected emergency vet costs.",
+            "I have a stable income or support to cover a pet's costs for its whole life.",
+            "I have considered recurring costs such as vaccinations, grooming, and preventive treatments."
+    };
+
+    private static final String[] TIME_QUESTIONS = {
+            "I have enough time every day to properly care for a pet.",
+            "I can provide regular attention, exercise, and companionship.",
+            "My daily schedule allows me to feed and clean up after a pet at consistent times.",
+            "I have someone or something arranged to care for a pet when I am away or in an emergency.",
+            "I am prepared to commit to a pet for its entire life, which may be many years."
+    };
+
+    private static final String[] LIVING_ENVIRONMENT_QUESTIONS = {
+            "My home is safe and suitable for keeping a pet.",
+            "The people I live with are aware of and supportive of having a pet.",
+            "My home has enough space for a pet to move, rest, and play comfortably.",
+            "I am allowed to keep a pet where I live (landlord, building, or community rules).",
+            "I can keep hazards such as toxic items, exposed wires, and unsecured exits away from a pet."
+    };
+
+    private static final String[] CARE_EXPERIENCE_QUESTIONS = {
+            "I understand the basic responsibilities involved in caring for a pet.",
+            "I am willing to learn more about proper pet care when necessary.",
+            "I have cared for a pet before, or I am comfortable seeking guidance from experienced owners or vets.",
+            "I know a pet's basic needs, such as proper diet, vaccinations, and regular vet checkups.",
+            "I am prepared to patiently handle training and behavioral challenges."
+    };
+
     private final AdoptionAssessmentService assessmentService;
     private final ConsoleInput input;
 
@@ -18,7 +50,7 @@ public class AdoptionAssessmentMenu {
         this.input = input;
     }
 
-    public void show(User loggedInUser, int animalID) {
+    public void show(User loggedInUser) {
 
         System.out.println();
         System.out.println("======================================");
@@ -37,20 +69,21 @@ public class AdoptionAssessmentMenu {
 
         try {
 
-            int financialScore = askFinancialQuestions();
+            int financialScore = askCategory(
+                    "1. FINANCIAL CAPACITY", FINANCIAL_QUESTIONS);
 
-            int timeScore = askTimeQuestions();
+            int timeScore = askCategory(
+                    "2. TIME COMMITMENT", TIME_QUESTIONS);
 
-            int livingEnvironmentScore =
-                    askLivingEnvironmentQuestions();
+            int livingEnvironmentScore = askCategory(
+                    "3. LIVING ENVIRONMENT", LIVING_ENVIRONMENT_QUESTIONS);
 
-            int careExperienceScore =
-                    askCareExperienceQuestions();
+            int careExperienceScore = askCategory(
+                    "4. CARE EXPERIENCE", CARE_EXPERIENCE_QUESTIONS);
 
             AdoptionAssessment assessment =
                     assessmentService.takeAssessment(
                             loggedInUser,
-                            animalID,
                             financialScore,
                             timeScore,
                             livingEnvironmentScore,
@@ -66,76 +99,21 @@ public class AdoptionAssessmentMenu {
         }
     }
 
-    private int askFinancialQuestions() {
+    // Asks every question in a category and returns the SUM of the answers
+    private int askCategory(String title, String[] questions) {
 
         System.out.println();
         System.out.println("--------------------------------------");
-        System.out.println("1. FINANCIAL CAPACITY");
+        System.out.println(title);
         System.out.println("--------------------------------------");
 
-        int q1 = askQuestion(
-                "I can regularly afford food, supplies, and basic care for a pet."
-        );
+        int total = 0;
 
-        int q2 = askQuestion(
-                "I can handle expected veterinary and other pet-related expenses."
-        );
+        for (int i = 0; i < questions.length; i++) {
+            total += askQuestion((i + 1) + ". " + questions[i]);
+        }
 
-        return (q1 + q2) / 2;
-    }
-
-    private int askTimeQuestions() {
-
-        System.out.println();
-        System.out.println("--------------------------------------");
-        System.out.println("2. TIME COMMITMENT");
-        System.out.println("--------------------------------------");
-
-        int q1 = askQuestion(
-                "I have enough time every day to properly care for a pet."
-        );
-
-        int q2 = askQuestion(
-                "I can provide regular attention, exercise, and companionship."
-        );
-
-        return (q1 + q2) / 2;
-    }
-
-    private int askLivingEnvironmentQuestions() {
-
-        System.out.println();
-        System.out.println("--------------------------------------");
-        System.out.println("3. LIVING ENVIRONMENT");
-        System.out.println("--------------------------------------");
-
-        int q1 = askQuestion(
-                "My home is safe and suitable for keeping a pet."
-        );
-
-        int q2 = askQuestion(
-                "The people I live with are aware of and supportive of having a pet."
-        );
-
-        return (q1 + q2) / 2;
-    }
-
-    private int askCareExperienceQuestions() {
-
-        System.out.println();
-        System.out.println("--------------------------------------");
-        System.out.println("4. CARE EXPERIENCE");
-        System.out.println("--------------------------------------");
-
-        int q1 = askQuestion(
-                "I understand the basic responsibilities involved in caring for a pet."
-        );
-
-        int q2 = askQuestion(
-                "I am willing to learn more about proper pet care when necessary."
-        );
-
-        return (q1 + q2) / 2;
+        return total;
     }
 
     private int askQuestion(String question) {
@@ -166,6 +144,8 @@ public class AdoptionAssessmentMenu {
     private void displayResult(
             AdoptionAssessment assessment) {
 
+        int max = AdoptionAssessment.MAX_CATEGORY_SCORE;
+
         System.out.println();
         System.out.println("======================================");
         System.out.println("       ASSESSMENT RESULT");
@@ -174,25 +154,25 @@ public class AdoptionAssessmentMenu {
         System.out.println(
                 "Financial Capacity: "
                         + assessment.getFinancialScore()
-                        + "/5"
+                        + "/" + max
         );
 
         System.out.println(
                 "Time Commitment: "
                         + assessment.getTimeScore()
-                        + "/5"
+                        + "/" + max
         );
 
         System.out.println(
                 "Living Environment: "
                         + assessment.getLivingEnvironmentScore()
-                        + "/5"
+                        + "/" + max
         );
 
         System.out.println(
                 "Care Experience: "
                         + assessment.getCareExperienceScore()
-                        + "/5"
+                        + "/" + max
         );
 
         System.out.println("--------------------------------------");
@@ -200,7 +180,7 @@ public class AdoptionAssessmentMenu {
         System.out.println(
                 "Total Score: "
                         + assessment.getTotalScore()
-                        + "/20"
+                        + "/" + AdoptionAssessment.MAX_SCORE
         );
 
         System.out.printf(
