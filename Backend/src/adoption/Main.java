@@ -7,11 +7,13 @@ import adoption.service.AuthService;
 import adoption.repository.AnimalRepository;
 import adoption.service.AnimalService;
 import adoption.service.BrowseService;
+import adoption.service.CareGuideService;
 
 import adoption.ui.AnimalMenu;
 import adoption.ui.BrowseMenu;
 import adoption.ui.ConsoleInput;
 import adoption.ui.AdoptionAssessmentMenu;
+import adoption.ui.CareGuideMenu;
 
 import adoption.repository.AdoptionAssessmentRepository;
 import adoption.service.AdoptionAssessmentService;
@@ -25,15 +27,17 @@ public class Main {
     private final AnimalMenu animalMenu;
     private final BrowseMenu browseMenu;
     private final AdoptionAssessmentMenu assessmentMenu;
+    private final CareGuideMenu careGuideMenu;
 
     public Main(ConsoleInput input, AuthService authService,
                 AnimalMenu animalMenu, BrowseMenu browseMenu,
-                AdoptionAssessmentMenu assessmentMenu) {
+                AdoptionAssessmentMenu assessmentMenu, CareGuideMenu careGuideMenu) {
         this.input = input;
         this.authService = authService;
         this.animalMenu = animalMenu;
         this.browseMenu = browseMenu;
         this.assessmentMenu = assessmentMenu;
+        this.careGuideMenu = careGuideMenu;
     }
 
     public static void main(String[] args) {
@@ -55,7 +59,9 @@ public class Main {
 
         AdoptionAssessmentMenu assessmentMenu = new AdoptionAssessmentMenu(assessmentService, input);
 
-        new Main(input, authService, animalMenu, browseMenu, assessmentMenu).run();
+        CareGuideMenu careGuideMenu = new CareGuideMenu(input, new CareGuideService());
+
+        new Main(input, authService, animalMenu, browseMenu, assessmentMenu, careGuideMenu).run();
     }
 
     private void run() {
@@ -135,19 +141,20 @@ public class Main {
             System.out.println("2. Browse Animals");
             System.out.println("3. My animal listings");
             System.out.println("4. Adoption Readiness Assessment");
-            System.out.println("5. Logout");
+            System.out.println("5. Responsible Ownership and Cost Guide");
+            System.out.println("6. Logout");
 
             switch(prompt("Choose an option")) {
                 case "1" -> user = viewProfile(user);
                 case "2" -> browseMenu.show(user);
                 case "3" -> animalMenu.show(user);
                 case "4" -> assessmentMenu.show(user);
-
-                case "5" -> {
+                case "5" -> careGuideMenu.show();
+                case "6" -> {
                     System.out.println("Logged out.");
                     loggedIn = false;
                 }
-
+ 
                 default -> System.out.println(
                         "Invalid option. Please enter 1, 2, 3, 4, or 5."
                 );

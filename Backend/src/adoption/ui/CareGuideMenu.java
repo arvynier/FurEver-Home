@@ -9,8 +9,8 @@ import adoption.service.CareGuideService;
 
 public class CareGuideMenu {
     private static final String[] OPTIONS = {
-        "Responsible ownership and basic care", "Estimated expenses", "Veterinary service estimates",
-        "Essential supplies", "Long-term cost projection", "Affordable veterinary care", "Back"
+        "Responsible Ownership and Basic Care", "Estimated Expenses", "Veterinary Service Estimates",
+        "Essential Supplies", "Long-term Cost Projection", "Affordable Veterinary Care", "Back"
     };
 
     private static final int DEFAULTYEARS = 5;
@@ -25,7 +25,7 @@ public class CareGuideMenu {
     }
 
     public void show() {
-        AnimalType type = input.chooseOption("Which kind of pet is the guide for", AnimalType.values(), null);
+        AnimalType type = input.chooseOption("\nWhich kind of pet is the guide for", AnimalType.values(), null);
         showFor(type);
     }
 
@@ -73,17 +73,17 @@ public class CareGuideMenu {
     }
 
     private void printExpenses(CareGuide guide) {
-        System.out.println("\nEstimated expenses of owning a " + guide.getAnimalType() + " ===");
+        System.out.println("\nEstimated Expenses of Owning a " + guide.getAnimalType());
         System.out.println("Basis: " + guide.getCostBasis());
 
         if (guide.hasInitialCosts()) {
-            System.out.println("\nInitial expenses (one-time):");
+            System.out.println("\nInitial Expenses (one-time):");
             printItems(guide, Frequency.ONE_TIME);
             System.out.println("  Estimated total: " + CostItem.formatRange(
                     guide.getInitialMin(), guide.getInitialMax(), guide.hasOpenEndedInitialCost()));
         }
 
-        System.out.println("\nMonthly expenses:");
+        System.out.println("\nMonthly Expenses:");
         printItems(guide, Frequency.MONTHLY);
         System.out.println("  Estimated monthly total: "
                 + CostItem.formatRange(guide.getMonthlyMin(), guide.getMonthlyMax(), false));
@@ -105,7 +105,7 @@ public class CareGuideMenu {
     }
 
     private void printVetServices(CareGuide guide) {
-        System.out.println("\nEstimated veterinary and healthcare expenses ===");
+        System.out.println("\nEstimated Veterinary and Healthcare Expenses");
         System.out.println("Consultations, vaccinations, deworming, preventive treatments, and emergency services.\n");
         for (CostItem item : guide.getVetServices()) {
             System.out.println("  - " + item.getName() + ": " + item.getRangeText());
@@ -115,7 +115,7 @@ public class CareGuideMenu {
     }
 
     private void printSupplies(CareGuide guide) {
-        System.out.println("\nEssential supplies for " + guide.getAnimalType() + "s ===");
+        System.out.println("\nEssential Supplies for " + guide.getAnimalType() + "s");
         for (String supply : guide.getEssentialSupplies()) {
             System.out.println("  - " + supply);
         }
@@ -137,7 +137,7 @@ public class CareGuideMenu {
             return;
         }
 
-        System.out.println("\nEstimated long-term cost of owning a " + guide.getAnimalType() + " ===");
+        System.out.println("\nEstimated Long-term Cost of Owning a " + guide.getAnimalType());
         System.out.println("Based on the regular monthly expenses only. Basis: " + guide.getCostBasis());
         printLine("Monthly", guide.getMonthlyMin(), guide.getMonthlyMax());
         printLine("Annual", guide.getProjectedMin(1), guide.getProjectedMax(1));
@@ -156,9 +156,8 @@ public class CareGuideMenu {
     }
 
     private void printAffordableCare(CareGuide guide) {
-        System.out.println("\nAffordable veterinary services and preventive care ===");
-        System.out.println("Local government units (LGUs), through their City or Municipal Veterinary Offices,");
-        System.out.println("may provide free or affordable veterinary services, including:");
+        System.out.println("\nAffordable veterinary services and preventive care");
+        System.out.println("Local government units (LGUs), through their City or Municipal Veterinary Offices may provide free or affordable veterinary services, including:");
         for (String service : guide.getLguServices()) {
             System.out.println("  - " + service);
         }
