@@ -157,7 +157,7 @@ public class Main {
 
     private User viewProfile(User user) {
         showProfile(user);
-        if (input.promptYesNo("Edit your profile? (y/n)", false)) {
+        if (input.promptYesNo("Edit your profile?", false)) {
             return editProfile(user);
         }
         return user;
