@@ -97,9 +97,9 @@ public abstract class CareGuide {
     public double getInitialMin() { return total(Frequency.ONE_TIME, false); }
     public double getInitialMax() { return total(Frequency.ONE_TIME, true); }
 
-    public boolean hasInitialCOsts() { return getInitialMax() > 0;}
+    public boolean hasInitialCosts() { return getInitialMax() > 0;}
 
-    public boolean hasOpenendedInitialCost() {
+    public boolean hasOpenEndedInitialCost() {
         for (CostItem item : getCostItems()) {
             if (item.getFrequency() == Frequency.ONE_TIME && item.isOpenEnded()) {
                 return true;
