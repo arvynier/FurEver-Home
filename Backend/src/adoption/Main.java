@@ -61,14 +61,11 @@ public class Main {
 
         ConsoleInput input = new ConsoleInput();
 
-        UserRepository userRepository =
-                new UserRepository();
+        UserRepository userRepository = new UserRepository();
 
-        AnimalRepository animalRepository =
-                new AnimalRepository();
+        AnimalRepository animalRepository = new AnimalRepository();
 
-        AuthService authService =
-                new AuthService(userRepository);
+        AuthService authService = new AuthService(userRepository);
 
         AnimalService animalService =
                 new AnimalService(
@@ -97,9 +94,7 @@ public class Main {
 
         // ADOPTION ASSESSMENT
 
-        AdoptionAssessmentRepository
-                assessmentRepository =
-                new AdoptionAssessmentRepository();
+        AdoptionAssessmentRepository assessmentRepository = new AdoptionAssessmentRepository();
 
         AdoptionAssessmentService
                 assessmentService =
@@ -126,9 +121,7 @@ public class Main {
 
         // ADOPTION APPLICATION
 
-        AdoptionApplicationRepository
-                applicationRepository =
-                new AdoptionApplicationRepository();
+        AdoptionApplicationRepository applicationRepository = new AdoptionApplicationRepository();
 
         AdoptionApplicationService
                 applicationService =
@@ -171,101 +164,48 @@ public class Main {
 
             switch (choice) {
 
-                case "1" ->
-                        handleRegistration();
-
-                case "2" ->
-                        handleLogin();
-
-                case "3" -> {
-
-                    System.out.println(
-                            "Goodbye!"
-                    );
-
+                case "1" -> handleRegistration();
+                case "2" -> handleLogin();
+                case "3" -> { System.out.println("Goodbye!");
                     running = false;
                 }
-
-                default ->
-                        System.out.println(
-                                "Invalid option. Please choose only between 1, 2, or 3."
-                        );
+                default -> System.out.println("Invalid option. Please choose only between 1, 2, or 3.");
             }
         }
     }
 
 
     private void printMenu() {
-
         System.out.println(
-                "Responsible Pet Adoption/Rehoming System"
-        );
-
-        for (int i = 0;
-             i < menuOptions.length;
-             i++) {
-
-            System.out.println(
-                    (i + 1)
-                            + ". "
-                            + menuOptions[i]
-            );
+                "Responsible Pet Adoption/Rehoming System");
+        for (int i = 0; i < menuOptions.length; i++) {
+            System.out.println((i + 1) + ". " + menuOptions[i]);
         }
     }
 
 
     private void handleRegistration() {
-
-        System.out.println(
-                "Registration Form"
-        );
+        System.out.println("Registration Form");
 
         try {
+            String firstName = prompt("First Name");
+            String lastName = prompt("Last Name");
+            String email = prompt("Email Address");
+            String password = prompt("Password (min 8 chars, letters and numbers)");
+            String confirmPassword = prompt("Confirm Password");
 
-            String firstName =
-                    prompt("First Name");
-
-            String lastName =
-                    prompt("Last Name");
-
-            String email =
-                    prompt("Email Address");
-
-            String password =
-                    prompt(
-                            "Password (min 8 chars, letters and numbers)"
-                    );
-
-            String confirmPassword =
-                    prompt("Confirm Password");
-
-            if (!password.equals(
-                    confirmPassword)) {
-
-                System.out.println(
-                        "Passwords do not match."
-                );
-
+            if (!password.equals(confirmPassword)) {
+                System.out.println("Passwords do not match.");
                 return;
             }
 
-            String mobile =
-                    prompt(
-                            "Mobile Number (09XXXXXXXXX)"
-                    );
+            String mobile = prompt("Mobile Number (09XXXXXXXXX)");
 
-            int age =
-                    Integer.parseInt(
-                            prompt("Age")
-                    );
+            int age = Integer.parseInt(prompt("Age"));
 
-            String address =
-                    prompt("Address");
+            String address = prompt("Address");
 
-            String picture =
-                    prompt(
-                            "Profile picture path (optional, press Enter to skip)"
-                    );
+            String picture = prompt("Profile picture path (optional, press Enter to skip)");
 
             User user =
                     authService.register(
@@ -279,35 +219,20 @@ public class Main {
                             picture
                     );
 
-            System.out.println(
-                    "Registration successful! Welcome, "
-                            + user.getFullName()
-                            + "."
-            );
-
+            System.out.println("Registration successful! Welcome, " + user.getFullName() + ".");
         } catch (AdoptionException e) {
-
-            System.out.println(
-                    "Registration failed: "
-                            + e.getMessage()
-            );
+            System.out.println("Registration failed: " + e.getMessage());
         }
     }
 
 
     private void handleLogin() {
-
         System.out.println(
-                "Login"
-        );
+                "Login");
 
         try {
-
-            String email =
-                    prompt("Email address");
-
-            String password =
-                    prompt("Password");
+            String email = prompt("Email address");
+            String password = prompt("Password");
 
             User user =
                     authService.login(
@@ -316,227 +241,81 @@ public class Main {
                     );
 
             showAccountMenu(user);
-
         } catch (AdoptionException e) {
-
-            System.out.println(
-                    "Login failed: "
-                            + e.getMessage()
-            );
+            System.out.println("Login failed: " + e.getMessage());
         }
     }
 
 
     private void showAccountMenu(User user) {
-
-        System.out.println(
-                "\nLogin successful!"
-        );
-
-        System.out.println(
-                "Welcome back, "
-                        + user
-                        + "."
-        );
+        System.out.println("\nLogin successful!");
+        System.out.println("Welcome back, "+ user + ".");
 
         boolean loggedIn = true;
-
         while (loggedIn) {
-
-            System.out.println(
-                    "\nAccount Menu"
-            );
-
-            System.out.println(
-                    "1. View my profile"
-            );
-
-            System.out.println(
-                    "2. Browse Animals"
-            );
-
-            System.out.println(
-                    "3. My animal listings"
-            );
-
-            System.out.println(
-                    "4. Adoption Readiness Assessment"
-            );
-
-            System.out.println(
-                    "5. Responsible Ownership and Cost Guide"
-            );
-
-            System.out.println(
-                    "6. Adoption Applications"
-            );
-
-            System.out.println(
-                    "7. Logout"
-            );
+            System.out.println("\nAccount Menu");
+            System.out.println("1. View my profile");
+            System.out.println("2. Browse Animals");
+            System.out.println("3. My animal listings");
+            System.out.println("4. Adoption Readiness Assessment");
+            System.out.println("5. Responsible Ownership and Cost Guide");
+            System.out.println("6. Adoption Applications");
+            System.out.println("7. Logout");
 
 
-            switch (
-                    prompt("Choose an option")
-            ) {
-
-                case "1" ->
-                        user = viewProfile(user);
-
-                case "2" ->
-                        browseMenu.show(user);
-
-                case "3" ->
-                        animalMenu.show(user);
-
-                case "4" ->
-                        assessmentMenu.show(user);
-
-                case "5" ->
-                        careGuideMenu.show();
-
-                case "6" ->
-                        applicationMenu.show(user);
-
+            switch (prompt("Choose an option")) {
+                case "1" -> user = viewProfile(user);
+                case "2" -> browseMenu.show(user);
+                case "3" -> animalMenu.show(user);
+                case "4" -> assessmentMenu.show(user);
+                case "5" -> careGuideMenu.show();
+                case "6" -> applicationMenu.show(user);
                 case "7" -> {
-
-                    System.out.println(
-                            "Logged out."
-                    );
-
+                    System.out.println("Logged out.");
                     loggedIn = false;
                 }
-
-                default ->
-                        System.out.println(
-                                "Invalid option. Please enter 1 to 7."
-                        );
+                default -> System.out.println("Invalid option. Please enter 1 to 7.");
             }
         }
     }
 
 
     private User viewProfile(User user) {
-
         showProfile(user);
-
-        if (input.promptYesNo(
-                "Edit your profile?",
-                false)) {
-
+        if (input.promptYesNo("Edit your profile?", false)) {
             return editProfile(user);
         }
-
         return user;
     }
 
 
     private void showProfile(User user) {
-
-        System.out.println(
-                "\nName: "
-                        + user.getFullName()
-        );
-
-        System.out.println(
-                "Age: "
-                        + user.getAge()
-                        + " | Mobile: "
-                        + user.getMobileNumber()
-        );
-
-        System.out.println(
-                "Email: "
-                        + user.getEmail()
-        );
-
-        System.out.println(
-                "Address: "
-                        + user.getAddress()
-        );
-
-        System.out.println(
-                "Profile picture: "
-                        + user.getProfilePicturePath()
-                        + (user.hasProfilePicture()
-                        ? ""
-                        : " (default)")
-        );
+        System.out.println("\nName: " + user.getFullName());
+        System.out.println("Age: " + user.getAge() + " | Mobile: " + user.getMobileNumber());
+        System.out.println("Email: " + user.getEmail());
+        System.out.println("Address: " + user.getAddress());
+        System.out.println("Profile picture: " + user.getProfilePicturePath() + (user.hasProfilePicture() ? "" : " (default)"));
     }
 
-
     private User editProfile(User user) {
-
-        System.out.println(
-                "Edit Profile"
-        );
-
-        System.out.println(
-                "Leave a field blank to keep the current value. "
-                        + "The email and password cannot be changed."
-        );
+        System.out.println("Edit Profile");
+        System.out.println("Leave a field blank to keep the current value. " + "The email and password cannot be changed.");
 
         try {
-
-            String firstName =
-                    askWithCurrent(
-                            "First name",
-                            user.getFirstName()
-                    );
-
-            String lastName =
-                    askWithCurrent(
-                            "Last name",
-                            user.getLastName()
-                    );
-
-            String mobile =
-                    askWithCurrent(
-                            "Mobile number",
-                            user.getMobileNumber()
-                    );
-
-            int age =
-                    Integer.parseInt(
-                            askWithCurrent(
-                                    "Age",
-                                    String.valueOf(
-                                            user.getAge()
-                                    )
-                            )
-                    );
-
-            String address =
-                    askWithCurrent(
-                            "Address",
-                            user.getAddress()
-                    );
-
-            String currentPicture =
-                    user.getProfilePicturePath();
+            String firstName = askWithCurrent("First name", user.getFirstName());
+            String lastName = askWithCurrent("Last name", user.getLastName());
+            String mobile = askWithCurrent("Mobile number", user.getMobileNumber());
+            int age = Integer.parseInt(askWithCurrent("Age", String.valueOf(user.getAge())));
+            String address = askWithCurrent("Address", user.getAddress());
+            String currentPicture = user.getProfilePicturePath();
 
             String answer =
                     prompt(
-                            "Profile picture path ["
-                                    + (currentPicture == null
-                                    ? "none"
-                                    : currentPicture)
-                                    + "] (Enter to keep, type 'remove' to delete)"
-                    ).replace(
-                            "\"",
-                            ""
-                    );
+                            "Profile picture path [" + (currentPicture == null ? "none" : currentPicture) + "] (Enter to keep, type 'remove' to delete)"
+                    ).replace("\"", "");
 
             String picture =
-                    answer.isBlank()
-                            ? currentPicture
-                            : (
-                            answer.equalsIgnoreCase(
-                                    "remove"
-                            )
-                                    ? null
-                                    : answer
-                    );
+                    answer.isBlank() ? currentPicture : (answer.equalsIgnoreCase("remove") ? null : answer);
 
             User updated =
                     authService.updateProfile(
@@ -549,39 +328,18 @@ public class Main {
                             picture
                     );
 
-            System.out.println(
-                    "Profile updated successfully."
-            );
-
+            System.out.println("Profile updated successfully.");
             return updated;
-
         } catch (AdoptionException e) {
-
-            System.out.println(
-                    "Profile update failed: "
-                            + e.getMessage()
-            );
+            System.out.println("Profile update failed: " + e.getMessage());
         }
-
         return user;
     }
 
 
-    private String askWithCurrent(
-            String label,
-            String current) {
-
-        String answer =
-                prompt(
-                        label
-                                + "["
-                                + current
-                                + "]"
-                );
-
-        return answer.isBlank()
-                ? current
-                : answer;
+    private String askWithCurrent(String label, String current) {
+        String answer = prompt( label + "[" + current + "]");
+        return answer.isBlank() ? current : answer;
     }
 
 
