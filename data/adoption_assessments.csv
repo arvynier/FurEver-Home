@@ -1,2 +1,3 @@
 ID,applicantID,financialScore,timeScore,livingEnvironmentScore,careExperienceScore,totalScore,readinessResult
 1,1,24,17,23,21,85,Highly Ready
+2,2,20,25,15,25,85,Highly Ready

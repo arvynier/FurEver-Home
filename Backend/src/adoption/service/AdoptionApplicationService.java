@@ -10,7 +10,6 @@ import adoption.model.Animal;
 import adoption.model.User;
 
 import adoption.repository.AdoptionApplicationRepository;
-import adoption.repository.AdoptionAssessmentRepository;
 import adoption.repository.AnimalRepository;
 
 import java.util.List;
