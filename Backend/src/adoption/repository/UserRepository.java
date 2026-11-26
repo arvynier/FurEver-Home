@@ -5,6 +5,7 @@ import adoption.model.User;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
+import adoption.exception.AdoptionException.NotFoundException;
 
 public class UserRepository extends CsvRepository<User> {
     private static final Path defaultFile = Path.of("data", "users.csv");
@@ -36,6 +37,18 @@ public class UserRepository extends CsvRepository<User> {
         users.add(saved);
         saveAll(users);
         return saved;
+    }
+
+    public void update(User user) throws AdoptionException {
+        List<User> users = loadAll();
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getID() == user.getID()) {
+                users.set(i, user);
+                saveAll(users);
+                return;
+            }
+        }
+        throw new NotFoundException("User with ID " + user.getID() + " not found.");
     }
 
     public Optional<User> findByID(int ID) throws AdoptionException {

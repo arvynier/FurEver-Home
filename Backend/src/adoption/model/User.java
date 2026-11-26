@@ -27,6 +27,10 @@ public class User extends Person {
                 getAge(), getAddress(), profilePicturePath, passwordSalt, passwordHash);
     }
 
+    public User withProfile(String firstName, String lastName, String mobileNumber, int age, String address, String profilePicturePath) {
+        return new User(id, firstName, lastName, getEmail(), mobileNumber, age, address, profilePicturePath, passwordSalt, passwordHash);
+    }
+
     public String getProfilePicturePath() {
         return profilePicturePath;
     }

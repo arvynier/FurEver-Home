@@ -53,4 +53,17 @@ public class AuthService {
             }
             return user;
     }
+
+    public User updateProfile(User current, String firstName, String lastName, String mobileNumber, int age, String address, String profilePicturePath) throws AdoptionException {
+        InputValidator.validateName(firstName, "First name");
+        InputValidator.validateName(lastName, "Last name");
+        InputValidator.validateMobileNumber(mobileNumber);
+        InputValidator.validateAge(age);
+        InputValidator.validateAddress(address);
+        InputValidator.validateProfilePicture(profilePicturePath);
+
+        User updated = current.withProfile(firstName.trim(), lastName.trim(), mobileNumber.trim(), age, address.trim(), profilePicturePath);
+        userRepository.update(updated);
+        return updated;
+    }
 }

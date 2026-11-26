@@ -138,7 +138,7 @@ public class Main {
             System.out.println("5. Logout");
 
             switch(prompt("Choose an option")) {
-                case "1" -> showProfile(user);
+                case "1" -> user = viewProfile(user);
                 case "2" -> browseMenu.show(user);
                 case "3" -> animalMenu.show(user);
                 case "4" -> assessmentMenu.show(user);
@@ -155,6 +155,14 @@ public class Main {
         }
     }
 
+    private User viewProfile(User user) {
+        showProfile(user);
+        if (input.promptYesNo("Edit your profile? (y/n)", false)) {
+            return editProfile(user);
+        }
+        return user;
+    }
+
     private void showProfile(User user) {
         System.out.println("\nName: " + user.getFullName());
         System.out.println("Age: " + user.getAge() + " | Mobile: " + user.getMobileNumber());
@@ -162,6 +170,38 @@ public class Main {
         System.out.println("Address: " + user.getAddress());
         System.out.println("Profile picture: " + user.getProfilePicturePath()
                 + (user.hasProfilePicture() ? "" : " (default)"));
+    }
+
+    private User editProfile(User user) {
+        System.out.println("Edit Profile");
+        System.out.println("Leave a field blank to keep the current value. The email and password cannot be changed.");
+        
+        try {
+            String firstName = askWithCurrent("First name", user.getFirstName());
+            String lastName = askWithCurrent("Last name", user.getLastName());
+            String mobile = askWithCurrent("Mobile number", user.getMobileNumber());
+            int age = Integer.parseInt(askWithCurrent("Age", String.valueOf(user.getAge())));
+            String address = askWithCurrent("Address", user.getAddress());
+
+            String currentPicture = user.getProfilePicturePath();
+            String answer = prompt("Profile picture path ["
+                    + (currentPicture == null ? "none" : currentPicture)
+                    + "] (Enter to keep, type 'remove' to delete)").replace("\"", "");
+            String picture = answer.isBlank() ? currentPicture
+                    : (answer.equalsIgnoreCase("remove") ? null : answer);
+
+            User updated = authService.updateProfile(user, firstName, lastName, mobile, age, address, picture);
+            System.out.println("Profile updated successfully.");
+            return updated;
+        } catch (AdoptionException e) {
+            System.out.println("Profile update failed: " + e.getMessage());
+        } 
+        return user;
+    }
+
+    private String askWithCurrent(String label, String current) {
+        String answer = prompt(label + "[" + current + "]");
+        return answer.isBlank() ? current : answer;
     }
 
     private String prompt(String label) {
