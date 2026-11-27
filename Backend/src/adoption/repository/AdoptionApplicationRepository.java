@@ -2,8 +2,10 @@ package adoption.repository;
 
 import adoption.exception.AdoptionException;
 import adoption.model.AdoptionApplication;
+import adoption.model.ApplicationForm;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,14 @@ public class AdoptionApplicationRepository
             "assessmentID",
             "assessmentScore",
             "readinessResult",
-            "status"
+            "status",
+            "reasonForAdopting",
+            "livingArrangement",
+            "primaryCaregiver",
+            "existingPets",
+            "homeVisitAgreed",
+            "messageToPoster",
+            "submittedAt"
     };
 
     public AdoptionApplicationRepository() {
@@ -35,6 +44,8 @@ public class AdoptionApplicationRepository
     @Override
     protected String[] toRow(AdoptionApplication application) {
 
+        ApplicationForm form = application.getForm();
+
         return new String[]{
                 String.valueOf(application.getID()),
                 String.valueOf(application.getAnimalID()),
@@ -42,12 +53,39 @@ public class AdoptionApplicationRepository
                 String.valueOf(application.getAssessmentID()),
                 String.valueOf(application.getAssessmentScore()),
                 application.getReadinessResult(),
-                application.getStatus().name()
+                application.getStatus().name(),
+                form.getReasonForAdopting(),
+                form.getLivingArrangement(),
+                form.getPrimaryCaregiver(),
+                form.getExistingPets(),
+                String.valueOf(form.isHomeVisitAgreed()),
+                form.getMessageToPoster(),
+                application.getSubmittedAt() == null
+                        ? ""
+                        : application.getSubmittedAt().toString()
         };
     }
 
     @Override
     protected AdoptionApplication fromRow(String[] row) {
+
+        // Old rows (saved before the form existed) only have 7 columns
+        boolean hasForm = row.length >= HEADERS.length;
+
+        ApplicationForm form = hasForm
+                ? new ApplicationForm(
+                        row[7],
+                        row[8],
+                        row[9],
+                        row[10],
+                        Boolean.parseBoolean(row[11]),
+                        row[12])
+                : new ApplicationForm("N/A", "N/A", "N/A", "N/A", false, "N/A");
+
+        LocalDateTime submittedAt =
+                hasForm && !row[13].isBlank()
+                        ? LocalDateTime.parse(row[13])
+                        : null;
 
         return new AdoptionApplication(
                 Integer.parseInt(row[0]),
@@ -56,7 +94,9 @@ public class AdoptionApplicationRepository
                 Integer.parseInt(row[3]),
                 Integer.parseInt(row[4]),
                 row[5],
-                AdoptionApplication.Status.valueOf(row[6])
+                AdoptionApplication.Status.valueOf(row[6]),
+                form,
+                submittedAt
         );
     }
 

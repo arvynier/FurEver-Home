@@ -1,5 +1,8 @@
 package adoption.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class AdoptionApplication {
 
     public enum Status {
@@ -8,14 +11,20 @@ public class AdoptionApplication {
         REJECTED
     }
 
+    private static final DateTimeFormatter DATE_FORMAT =
+            DateTimeFormatter.ofPattern("MMM d, yyyy h:mm a");
+
     private final int id;
     private final int animalID;
     private final int applicantID;
     private final int assessmentID;
     private final int assessmentScore;
     private final String readinessResult;
+    private final ApplicationForm form;
+    private final LocalDateTime submittedAt;
     private Status status;
 
+    // Used when loading from the CSV (or after an ID is assigned)
     public AdoptionApplication(
             int id,
             int animalID,
@@ -23,7 +32,9 @@ public class AdoptionApplication {
             int assessmentID,
             int assessmentScore,
             String readinessResult,
-            Status status) {
+            Status status,
+            ApplicationForm form,
+            LocalDateTime submittedAt) {
 
         this.id = id;
         this.animalID = animalID;
@@ -32,14 +43,18 @@ public class AdoptionApplication {
         this.assessmentScore = assessmentScore;
         this.readinessResult = readinessResult;
         this.status = status;
+        this.form = form;
+        this.submittedAt = submittedAt;
     }
 
+    // Used for a brand-new application: PENDING, and the date is set by the system
     public AdoptionApplication(
             int animalID,
             int applicantID,
             int assessmentID,
             int assessmentScore,
-            String readinessResult) {
+            String readinessResult,
+            ApplicationForm form) {
 
         this(
                 0,
@@ -48,7 +63,9 @@ public class AdoptionApplication {
                 assessmentID,
                 assessmentScore,
                 readinessResult,
-                Status.PENDING
+                Status.PENDING,
+                form,
+                LocalDateTime.now().withNano(0)
         );
     }
 
@@ -84,6 +101,19 @@ public class AdoptionApplication {
         this.status = status;
     }
 
+    public ApplicationForm getForm() {
+        return form;
+    }
+
+    // Can be null for old rows saved before this field existed
+    public LocalDateTime getSubmittedAt() {
+        return submittedAt;
+    }
+
+    public String getSubmittedAtText() {
+        return submittedAt == null ? "N/A" : submittedAt.format(DATE_FORMAT);
+    }
+
     public AdoptionApplication withID(int newID) {
         return new AdoptionApplication(
                 newID,
@@ -92,7 +122,9 @@ public class AdoptionApplication {
                 assessmentID,
                 assessmentScore,
                 readinessResult,
-                status
+                status,
+                form,
+                submittedAt
         );
     }
 
@@ -100,10 +132,9 @@ public class AdoptionApplication {
     public String toString() {
         return "Application ID: " + id
                 + "\nAnimal ID: " + animalID
-                + "\nApplicant ID: " + applicantID
-                + "\nAssessment ID: " + assessmentID
                 + "\nAssessment Score: " + assessmentScore + "/100"
                 + "\nReadiness Result: " + readinessResult
-                + "\nStatus: " + status;
+                + "\nStatus: " + status
+                + "\nDate Submitted: " + getSubmittedAtText();
     }
 }

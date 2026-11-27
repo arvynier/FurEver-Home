@@ -128,7 +128,8 @@ public class Main {
                 new AdoptionApplicationService(
                         applicationRepository,
                         assessmentService,
-                        animalRepository
+                        animalRepository,
+                        userRepository
                 );
 
         AdoptionApplicationMenu

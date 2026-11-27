@@ -1,1 +1,2 @@
-ID,animalID,applicantID,assessmentID,assessmentScore,readinessResult,status
+ID,animalID,applicantID,assessmentID,assessmentScore,readinessResult,status,reasonForAdopting,livingArrangement,primaryCaregiver,existingPets,homeVisitAgreed,messageToPoster,submittedAt
+1,1,2,2,85,Highly Ready,PENDING,I want to have a pet.,Condo,Me,None,true,Do you have any other communication apps where I can message you?,2026-11-27T10:10:43
